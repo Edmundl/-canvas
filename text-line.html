@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <button id="btnclear">清除画布</button>
+    <button id="btnline">点击开始画直线</button>
+    <button id="btnrect">点击开始画矩形</button>
+    <button id="btncir">点击开始画圆形</button>
+    <button id="btntriangle">点击开始画三角形</button>
+    <canvas id="myCanvas" style="border:1px solid black" width="400" height="200"></canvas>
+    <script type="text/javascript">
+        var c=document.getElementById("myCanvas");
+        var context=c.getContext("2d");//允许绘制2d环境
+
+        var btnclear=document.getElementById("btnclear");
+        btnclear.addEventListener("click",function(){
+            context.clearRect(0,0,c.width,c.height);
+        });
+
+        var btnline=document.getElementById("btnline");
+        btnline.addEventListener("click",function(){
+            context.beginPath();
+            context.moveTo(0,0);//起始点
+            context.lineTo(200,100);//终止点
+            context.stroke();//绘制轮廓
+            context.closePath();
+        });
+
+        var btnrect=document.getElementById("btnrect");
+        btnrect.addEventListener("click",function(){
+            context.beginPath();
+            //fill是填充
+            context.fillStyle="#FF00FF";//背景填充
+            context.fillRect(0,0,200,100);//矩形左上角横坐标、矩形左上角纵坐标、矩形的宽、矩形的高
+            //stroke式轮廓
+            context.strokeStyle="black";//轮廓颜色
+            context.strokeRect(0,0,100,50);//矩形左上角横坐标、矩形左上角纵坐标、矩形的宽、矩形的高
+            context.stroke();//绘制轮廓
+            context.closePath();
+        });
+
+        var btncir=document.getElementById("btncir");
+        btncir.addEventListener("click",function(){
+            context.beginPath();
+            context.fillStyle="red";
+            context.arc(100,75,50,0,Math.PI*2,true);//起点距左位置，起点距上位置，圆半径，开始角度，结束角度，是否按照顺时针绘制
+            context.stroke();//绘制轮廓
+            context.fill();//执行填充
+            context.closePath();
+        });
+
+        var btntriangle=document.getElementById("btntriangle");
+        btntriangle.addEventListener("click",function(){
+            context.beginPath();
+            context.fillStyle="red";
+            context.moveTo(25,25);
+            context.lineTo(150,25);
+            context.lineTo(25,150);
+            context.lineTo(25,25);
+            context.stroke();//绘制轮廓
+            context.fill();//执行填充
+            context.closePath();
+        });
+    </script>
+</body>
+</html>
